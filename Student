@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Web Application</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+    }
+    header {
+      background: #4CAF50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    nav {
+      background: #333;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      padding: 20px;
+    }
+    form input, form select, form button {
+      display: block;
+      margin: 10px 0;
+      padding: 8px;
+      width: 100%;
+      max-width: 400px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 700px;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background: #4CAF50;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Student Web Application</h1>
+  </header>
+
+  <nav>
+    <a href="#" onclick="showPage('home')">Home</a>
+    <a href="#" onclick="showPage('register')">Register Student</a>
+    <a href="#" onclick="showPage('list')">Student List</a>
+  </nav>
+
+  <div class="container">
+    <!-- Home Page -->
+    <div id="home" class="page">
+      <h2>Welcome!</h2>
+      <p>This is a simple student web application built with HTML, CSS, and JavaScript.</p>
+    </div>
+
+    <!-- Student Registration Page -->
+    <div id="register" class="page" style="display:none;">
+      <h2>Student Registration</h2>
+      <form id="studentForm">
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="number" id="age" placeholder="Age" required>
+        <select id="course" required>
+          <option value="">Select Course</option>
+          <option value="Computer Science">Computer Science</option>
+          <option value="Data Science">Data Science</option>
+          <option value="Mathematics">Mathematics</option>
+          <option value="Physics">Physics</option>
+        </select>
+        <button type="submit">Register</button>
+      </form>
+    </div>
+
+    <!-- Student List Page -->
+    <div id="list" class="page" style="display:none;">
+      <h2>Registered Students</h2>
+      <table id="studentTable">
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Course</th>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // Function to show pages
+    function showPage(pageId) {
+      let pages = document.querySelectorAll('.page');
+      pages.forEach(page => page.style.display = 'none');
+      document.getElementById(pageId).style.display = 'block';
+    }
+
+    // Handle form submission
+    const form = document.getElementById('studentForm');
+    const table = document.getElementById('studentTable');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      let name = document.getElementById('name').value;
+      let age = document.getElementById('age').value;
+      let course = document.getElementById('course').value;
+
+      // Add student to table
+      let row = table.insertRow();
+      row.insertCell(0).innerText = name;
+      row.insertCell(1).innerText = age;
+      row.insertCell(2).innerText = course;
+
+      // Reset form
+      form.reset();
+
+      // Go to student list page
+      showPage('list');
+    });
+  </script>
+</body>
+</html>
